@@ -15,6 +15,7 @@
   <arg name="initY" default="-2.2" />
   <arg name="initYaw" default="0" />
   <arg name="scanTopic" default="scan" />
+  <arg name="odomTopic" default="odom" />
   <arg name="baseFrame" default="$(arg tfpre)/base_link" />
   <arg name="odomFrame" default="$(arg tfpre)/odom" />
 
@@ -40,7 +41,7 @@
       <arg name="initial_pose_y" value="$(arg initY)" />
       <arg name="initial_pose_a" value="$(arg initYaw)" />
     </include>
-    <include file="$(find multi_husky_nav)/launch/include/move_base_hsk.launch" >
+    <include file="$(find multi_husky_nav)/launch/include/move_base_hsk.launch" unless="$(arg sfm_mpdm_enabled)">
       <arg name="namespace" value="$(arg namespace)" />
       <arg name="tfpre" value="$(arg tfpre)" />
       <arg name="odom_frame_id"   value="$(arg odomFrame)"/>
@@ -50,6 +51,8 @@
     <include file="$(find sfm_mpdm)/launch/sfm_mpdm_launch.launch" if="$(arg sfm_mpdm_enabled)">
       <arg name="robot_namespace" value="$(arg namespace)" />
       <arg name="robotlist" value="$(arg robotlist)" />
+      <arg name="scan_topic" value="$(arg scanTopic)" />
+      <arg name="odom_topic" value="$(arg odomTopic)" />
     </include>
   </group>
  
