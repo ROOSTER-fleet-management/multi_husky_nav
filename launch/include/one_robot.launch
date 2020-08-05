@@ -2,8 +2,8 @@
 
   <!-- SFM-MPDM package arguments required for the sfm_mpdm_launch.launch file and the sfm_mpdm_base node for all robots -->
   <arg name="sfm_mpdm_enabled" default="True" doc="(True or False) Default true: Launches all robots with sfm-mpdm nodes instead of move_base. False: launches all robots with move_base instead of sfm-mpdm." />
-  <arg name="robotlist" doc="A list of robot namespace IDs." />
-  <rosparam param="/robot_list" subst_value="True">$(arg robotlist)</rosparam>
+  <!--<arg name="robotlist" doc="A list of robot namespace IDs." />
+  <rosparam param="/robot_list" subst_value="True">$(arg robotlist)</rosparam>-->
 
   <arg name="namespace" default="hsk01" />
   <arg name="tfpre" default="$(arg namespace)_tf" />
@@ -50,7 +50,7 @@
     </include>
     <include file="$(find sfm_mpdm)/launch/sfm_mpdm_launch.launch" if="$(arg sfm_mpdm_enabled)">
       <arg name="robot_namespace" value="$(arg namespace)" />
-      <arg name="robotlist" value="$(arg robotlist)" />
+      <!--<arg name="robotlist" value="$(arg robotlist)" />-->
       <arg name="scan_topic" value="$(arg scanTopic)" />
       <arg name="odom_topic" value="$(arg odomTopic)" />
     </include>
